@@ -1,4 +1,34 @@
-<div class="container">
+<div class='welcome_stats'
 
+<% if @current_user %>
+<h2>Welcome <%= @current_user.email %></h2>
 
+<%= erb :deck %>
+
+<% if @current_user.rounds.length != 0%>
+<h2>Your Stats</h2>
+
+<table class="stats">
+
+	<tr>
+		<th>Round</th>
+	    <th>Deck</th>
+	  	<th>Cards</th>
+		<th>Guessed</th>
+		<th>Correct</th>		
+		<th>Incorrect</th>		
+	</tr>
+	<% @current_user.rounds.reverse.each do |r| %>
+	<tr>
+		<td><%= r.id %></td>
+	    <td><%= r.deck.name %></td>
+	    <td><%= r.deck.cards.length %></td>
+		<td><%= r.guesses.length %></td>
+		<td><%= r.guesses.select {|g| g.correct}.count %></td>		
+		<td><%= r.guesses.select {|g| g.correct == false}.count %></td>		
+	</tr>
+		<% end %>
+</table>
+<% end %>
+<% end %>
 </div>

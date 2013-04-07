@@ -1,6 +1,29 @@
 # seed data
 
 
+himym = {
+
+"Ted" => "Mosby",
+"Marshall" => "Eriksen",
+"Robin" => "Sherbatsky",
+"Barney" => "Stinson",
+"Lily" => "Aldrin"
+
+}
+
+"1 + 1" => "2",
+"2 + 4" => "6",
+"5 + 1" => "6",
+"6 + 4" => "10",
+"7 + 1" => "8",
+"8 + 1" => "9",
+"23 + 1" => "24",
+"4 + 8" => "12",
+"2 + 8" => "10",
+"46 + 4" => "50",
+
+}
+
 easy = {
 
 "1 + 1" => "2",
@@ -550,6 +573,7 @@ capitals_deck = Deck.create(:name => 'Capitals')
 lyrics_deck = Deck.create(:name => 'Lyrics')
 what_is_deck = Deck.create(:name => 'What is')
 easy_deck = Deck.create(:name => 'Easy')
+himym_deck = Deck.create(:name => 'How I Met Your Mother')
 
 #create cards
 
@@ -567,6 +591,10 @@ end
 
 easy.each do |t,d|
   Card.create(:term => t, :definition => d, :deck => easy_deck)
+end
+
+himym.each do |t,d|
+  Card.create(:term => t, :definition => d, :deck => himym_deck)
 end
 
 # create users

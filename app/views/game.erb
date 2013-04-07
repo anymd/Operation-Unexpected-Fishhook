@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="card">
 		<% if @card %>
+			Card <%= @round.guesses.length + 1 %> of <%= @round.deck.cards.length %>
 			<p><%= @card.term %></p>
 			<form action="/game/<%=@round.deck.id%>/<%= @card.id %>" method="post" >
 				<input type="text" name="answer" placeholder="answer" autofocus="autofocus"/><br>
@@ -14,7 +15,8 @@
 					<% else %>	
 						<div class="incorrect">
 					<% end %>	
-						Your last guess "<%= @guess %>" was...<%= @is_correct %>
+						Your last guess "<%= @guess %>" was...<%= @is_correct %><br><br>
+						The correct answer for "<%= @previous_card.term %>" is...<br><br> "<%= @previous_card.definition %>""
 						</div>
 
 				<% end %>

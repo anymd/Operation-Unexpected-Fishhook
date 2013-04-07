@@ -19,13 +19,13 @@ end
 post "/game/:deck_id/:card_id" do 
   signed_in?
   if session[:cards].length == 0
-    redirect '/welcome'
+    redirect '/'
   end
   @round = Round.find_by_id(session[:round])
   @guess = params[:answer]
-  previous_card = Card.find(params[:card_id])
+  @previous_card = Card.find(params[:card_id])
 
-  is_correct = (previous_card.definition.downcase == @guess.downcase) 
+  is_correct = (@previous_card.definition.downcase == @guess.downcase) 
   
   if is_correct 
     @is_correct = "correct!"
@@ -33,7 +33,7 @@ post "/game/:deck_id/:card_id" do
     @is_correct = "incorrect."
   end
 
-  previous_card.guesses << @round.guesses.create(correct: is_correct)
+  @previous_card.guesses << @round.guesses.create(correct: is_correct)
 
   @card = Card.find(session[:cards].shift)
 
